@@ -1,5 +1,10 @@
 object Program {
-  def run(args: Array[String]): Unit = {
+
+  // Thunk is a type that is a function that takes nothing and produces A.
+  private type Thunk[A] = () => A
+  type Description[A] = Thunk[A]
+
+  def createDescription(args: Array[String]): Description[Unit] = () => {
     display(hyphens)
     display(question)
 
