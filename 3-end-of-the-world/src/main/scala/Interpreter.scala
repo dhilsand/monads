@@ -9,7 +9,7 @@ object Interpreter {
       description.apply()
 
     val description: Description[Unit] =
-      Program.createDescription(args)
+      PointFreeProgram.createDescription(args)
 
     print(Console.GREEN)
     interpret(description)

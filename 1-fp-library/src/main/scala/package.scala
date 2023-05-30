@@ -1,9 +1,9 @@
 package object fplibrary {
   // Type aliases cannot live outside an object. So we put them in package object.
 
-  // A "thunk" in Scala is a term used to refer to a function that has zero arguments. 
-  // Thunks are often used in lazy computations where evaluation is deferred until necessary. 
-  // In a lazy evaluation context, thunks serve as placeholders for the actual values 
+  // A "thunk" in Scala is a term used to refer to a function that has zero arguments.
+  // Thunks are often used in lazy computations where evaluation is deferred until necessary.
+  // In a lazy evaluation context, thunks serve as placeholders for the actual values
   // which are computed only when they are needed.
 
   // Here `Thunk` is a type that is a function that takes nothing and produces a result A.
@@ -16,7 +16,11 @@ package object fplibrary {
   private type RegularArrow[A, B      ] = A =>   B
   private type KleisliArrow[A, B, C[_]] = A => C[B]
   // format: ON
-
   // Monads are there for the composition of KleisliArrows
 
+  implicit final class InfixNotationForPointFree[A, B](private val ab: A => B) extends AnyVal {
+    @inline def `;`[C](bc: B => C): A => C = PointFree.compose(ab, bc)
+    @inline def `.`[C](bc: B => C): A => C = PointFree.compose(ab, bc)
+    @inline def `-->`[C](bc: B => C): A => C = PointFree.compose(ab, bc)
+  }
 }

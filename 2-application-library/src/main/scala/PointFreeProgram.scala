@@ -1,25 +1,23 @@
 import fplibrary._
 
-object Program {
+object PointFreeProgram {
 
   // We wrap the entire run into a description.                 = // function that takes no arguments
   def createDescription(args: Array[String]): Description[Unit] = () => {
-    display(hyphens)
-    display(question)
 
-    val input: String = prompt()
-    val integerAmount: Int = convertStringToInt(input)
-    val positiveAmount: Int = ensureAmountIsPositive(integerAmount)
-    val balance: Int = round(positiveAmount)
-    val message: String = createMessage(balance)
-
-    display(message)
-    display(hyphens)
+    display(
+      hyphens(
+        display(
+          createMessage(
+            round(ensureAmountIsPositive(
+              convertStringToInt(
+                prompt(display(question(
+                  display(hyphens())))))))))))
   }
 
-  private val hyphens: String = "\u2500" * 50
+  private def hyphens(input: Any): String = "\u2500" * 50
 
-  private val question: String =
+  private def question(input: Any): String =
     "How much money would you like to deposit?"
 
   // side effect (writing to the console)
@@ -28,7 +26,7 @@ object Program {
   }
 
   // side effect (reading from the console)
-  private def prompt(): String =
+  private def prompt(input: Any): String =
     scala.io.StdIn.readLine()
 
   // potential side effect (throwing of a NumberFormatException)
