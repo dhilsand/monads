@@ -17,3 +17,11 @@ Since a functional program cannot observe those side-effects, fns that produce t
 As all effects are now recorded in the type system, and they become much easier to track and the entire program becomes much easier to reason about **independent of its size**. This is one of the many reasons why functional programmers keep insisting on programming only with pure effects instead of side-effects.
 
 We need a common interface for composing functions, and the common interface is that on **Monads**. Everything that has `flatMap` is a **monad**.
+
+--- 
+
+Instead of admitting that it is impossible to write a useful program without side effects, we separate the parts that are pure from the parts that are impure.
+We minimize the parts that are impure. We can separate them into separate projects.
+
+In our entire application, instead of performing side-effects, we switch to describing side-effects, and then by end we will have an interpreter that will interpret the description and it will be the only that will perform side effects.
+

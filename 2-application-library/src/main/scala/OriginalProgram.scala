@@ -1,9 +1,6 @@
-import fplibrary._
+object OriginalProgram {
 
-object Program {
-
-  // We wrap the entire run into a description.                 = // function that takes no arguments
-  def createDescription(args: Array[String]): Description[Unit] = () => {
+  def run(args: Array[String]): Unit = {
     display(hyphens)
     display(question)
 
