@@ -30,6 +30,25 @@ def cyan(projectName: String): String =
 
 addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.9")
 
+lazy val `fp-library` = 
+  project
+    .in(file("./1-fp-library"))
+    .settings(shellPrompt := (_ => fancyPrompt(name.value)))
+
+lazy val `application-library` = 
+  project
+    .in(file("./2-application-library"))
+    .settings(shellPrompt := (_ => fancyPrompt(name.value)))
+    .dependsOn(`fp-library`)
+
+lazy val `end-of-the-world` = 
+  project
+    .in(file("./3-end-of-the-world"))
+    .settings(shellPrompt := (_ => fancyPrompt(name.value)))
+    .dependsOn(`application-library`)
+
+
+
 addCommandAlias("ll", "projects")
 addCommandAlias("cd", "project")
 addCommandAlias("root", "project monads")
