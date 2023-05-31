@@ -12,6 +12,9 @@ object Interpreter {
       PointFreeProgram.createDescription(args)
 
     print(Console.GREEN)
+    // All output from here should be GREEN.
+    // This tells us that the entire program is running through the interpreter.
+    // this means we're not doing any
     interpret(description)
 
     print(Console.RESET)

@@ -3,20 +3,48 @@ import fplibrary._
 object PointFreeProgram {
 
   // We wrap the entire run into a description.                 = // function that takes no arguments
-  lazy val createDescription: Array[String] => Description[Unit] = args =>
-    Description.create(
-      display(
-        hyphens(
-          display(
-            createMessage(
-              round(
-                ensureAmountIsPositive(
-                  convertStringToInt(
-                    prompt(
-                      display(
-                        question(
-                          display(
-                            hyphens()))))))))))))
+  // lazy val createDescription: Array[String] => Description[Unit] = args =>
+  //   Description.create(
+  //     display(
+  //       hyphens(
+  //         display(
+  //           createMessage(
+  //             round(
+  //               ensureAmountIsPositive(
+  //                 convertStringToInt(
+  //                   prompt(
+  //                     display(
+  //                       question(
+  //                         display(
+  //                           hyphens(
+  //                             args)))))))))))))
+
+  lazy val createDescription: Array[String] => Description[Unit] =
+    ignoreArgs `;`
+      hyphens `;`
+      display `;`
+      question `;`
+      display `;`
+      prompt `;`
+      convertStringToInt `;`
+      ensureAmountIsPositive `;`
+      round `;`
+      createMessage `;`
+      display `;`
+      hyphens `;`
+      display `;`
+      fplibrary.Description.brokenCreate
+
+  // _ is a placeholder for the function argument. It indicates that the argument is not going to be used within the function implementation.
+  //
+  // => denotes the function arrow, indicating that what follows is the implementation of the function.
+  // () represents an empty value of type Unit.
+  // In Scala, Unit is similar to void in Java and indicates that the function does not return a meaningful result.
+  //
+  // Therefore, the implementation _ => () can be read as "ignore the argument and return an empty value."
+  // In other words, it is a function that doesn't do anything with the provided array of strings and simply returns Unit.
+  private lazy val ignoreArgs: Array[String] => Unit = _ =>
+    ()
 
   private lazy val hyphens: Any => String = _ =>
     "\u2500" * 50
