@@ -5,14 +5,18 @@ object PointFreeProgram {
   // We wrap the entire run into a description.                 = // function that takes no arguments
   def createDescription(args: Array[String]): Description[Unit] = () => {
 
-    display(
-      hyphens(
-        display(
-          createMessage(
-            round(ensureAmountIsPositive(
-              convertStringToInt(
-                prompt(display(question(
-                  display(hyphens())))))))))))
+    // display(
+    //   hyphens(
+    //     display(
+    //       createMessage(
+    //         round(ensureAmountIsPositive(
+    //           convertStringToInt(
+    //             prompt(display(question(
+    //               display(hyphens())))))))))))
+
+    // lazy val createDescription: Array[String] => Description[Unit] =
+    //   ignoreArgs `;`
+    //   hyphens `;`
   }
 
   private def hyphens(input: Any): String = "\u2500" * 50

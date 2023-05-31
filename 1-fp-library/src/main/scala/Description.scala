@@ -5,6 +5,10 @@ package fplibrary
 // going to handle the exception in any way.
 object Description {
   // By name parameter.
+
+  // By-name parameters in Scala are used to pass expressions. These expressions
+  // could represent some computation.
+
   // In Scala, parameters to functions are by default evaluated eagerly.
   // That means that the arguments are evaluated before they are passed
   // into the function. However, Scala also supports "by-name" parameters,
@@ -15,4 +19,9 @@ object Description {
   // argument is accessed within the function.
 
   def create[A](a: => A): Description[A] = () => a
+    // returns a function that takes no parameters, hence () and when
+    // called, it will evaluate and return the value of `a`.
+    
+  // equivalent
+  // def create[A](a: => A): () => A = () => a
 }
