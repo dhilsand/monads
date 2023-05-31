@@ -19,9 +19,9 @@ object Description {
   // argument is accessed within the function.
 
   def create[A](a: => A): Description[A] = () => a
-    // returns a function that takes no parameters, hence () and when
-    // called, it will evaluate and return the value of `a`.
-    
+  // returns a function that takes no parameters, hence () and when
+  // called, it will evaluate and return the value of `a`.
+
   // equivalent
   // def create[A](a: => A): () => A = () => a
 }

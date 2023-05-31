@@ -3,56 +3,54 @@ import fplibrary._
 object PointFreeProgram {
 
   // We wrap the entire run into a description.                 = // function that takes no arguments
-  def createDescription(args: Array[String]): Description[Unit] = () => {
+  lazy val createDescription: Array[String] => Description[Unit] = args =>
+    Description.create(
+      display(
+        hyphens(
+          display(
+            createMessage(
+              round(
+                ensureAmountIsPositive(
+                  convertStringToInt(
+                    prompt(
+                      display(
+                        question(
+                          display(
+                            hyphens()))))))))))))
 
-    // display(
-    //   hyphens(
-    //     display(
-    //       createMessage(
-    //         round(ensureAmountIsPositive(
-    //           convertStringToInt(
-    //             prompt(display(question(
-    //               display(hyphens())))))))))))
+  private lazy val hyphens: Any => String = _ =>
+    "\u2500" * 50
 
-    // lazy val createDescription: Array[String] => Description[Unit] =
-    //   ignoreArgs `;`
-    //   hyphens `;`
-  }
-
-  private def hyphens(input: Any): String = "\u2500" * 50
-
-  private def question(input: Any): String =
+  private lazy val question: Any => String = _ =>
     "How much money would you like to deposit?"
 
   // side effect (writing to the console)
-  private def display(input: Any): Unit = {
+  private lazy val display: Any => Unit = input =>
     println(input)
-  }
 
   // side effect (reading from the console)
-  private def prompt(input: Any): String =
-    scala.io.StdIn.readLine()
+  private lazy val prompt: Any => String = _ =>
+    "5" //scala.io.StdIn.readLine()
 
   // potential side effect (throwing of a NumberFormatException)
-  private def convertStringToInt(input: String): Int =
+  private lazy val convertStringToInt: String => Int = input =>
     input.toInt
 
-  private def ensureAmountIsPositive(amount: Int): Int =
+  private lazy val ensureAmountIsPositive: Int => Int = amount =>
     if (amount < 1)
       1
     else
       amount
 
-  @scala.annotation.tailrec
-  private def round(amount: Int): Int =
+  private lazy val round: Int => Int = amount =>
     if (isDivisibleByHundred(amount))
       amount
     else
       round(amount + 1)
 
-  private def isDivisibleByHundred(amount: Int): Boolean =
+  private lazy val isDivisibleByHundred: Int => Boolean = amount =>
     amount % 100 == 0
 
-  private def createMessage(balance: Int): String =
+  private lazy val createMessage: Int => String = balance =>
     s"Congratulations, you now have USD $balance."
 }
