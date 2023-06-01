@@ -19,21 +19,42 @@ object PointFreeProgram {
   //                           hyphens(
   //                             args)))))))))))))
 
+
+  // format: OFF
+  // lazy val createDescription: Array[String] => Description[Unit] =
+  //   ignoreArgs                  `;`
+  //     hyphens                   `;`
+  //     display                   `;`
+  //     question                  `;`
+  //     display                   `;`
+  //     prompt                    `;`
+  //     convertStringToInt        `;`
+  //     ensureAmountIsPositive    `;`
+  //     round                     `;`
+  //     createMessage             `;`
+  //     display                   `;`
+  //     hyphens                   `;`
+  //     display                   `;`
+  //     fplibrary.Description.brokenCreate
+  // format: ON
+
+  // format: OFF
   lazy val createDescription: Array[String] => Description[Unit] =
-    ignoreArgs `;`
-      hyphens `;`
-      display `;`
-      question `;`
-      display `;`
-      prompt `;`
-      convertStringToInt `;`
-      ensureAmountIsPositive `;`
-      round `;`
-      createMessage `;`
-      display `;`
-      hyphens `;`
-      display `;`
+    ignoreArgs                  -->
+      hyphens                   -->
+      display                   -->
+      question                  -->
+      display                   -->
+      prompt                    -->
+      convertStringToInt        -->
+      ensureAmountIsPositive    -->
+      round                     -->
+      createMessage             -->
+      display                   -->
+      hyphens                   -->
+      display                   -->
       fplibrary.Description.brokenCreate
+  // format: ON
 
   // _ is a placeholder for the function argument. It indicates that the argument is not going to be used within the function implementation.
   //

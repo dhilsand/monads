@@ -25,6 +25,6 @@ object Description {
   // equivalent
   // def create[A](a: => A): () => A = () => a
 
-  def brokenCreate[A]: A => Description[A] = a =>
+  def brokenCreate[A]: A => Description[A] = a => // a is already evaluated at this point.
     () => a
 }
