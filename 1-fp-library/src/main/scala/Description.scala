@@ -27,9 +27,9 @@ object Description {
 
   implicit val M: Monad[Description] = new Monad[Description] {
     final override def flatMap[A, B](ca: Description[A])(acb: A => Description[B]): Description[B] = Description.create {
-      val a = ca.apply()
-      val cb = acb(a)
-      val b = cb.apply()
+      val a = ca.apply() // executes the first function (i.e. the function on which flatMap is called)
+      val cb = acb(a)    // uses the second function to produce a function
+      val b = cb.apply() // executes the produced function
       b
     }
   }
