@@ -38,22 +38,23 @@ object PointFreeProgram {
   //     fplibrary.Description.brokenCreate
   // format: ON
 
+  import Description._
   // format: OFF
+  // This is function composition of simple
   lazy val createDescription: Array[String] => Description[Unit] =
-    ignoreArgs                  -->
+      ignoreArgs                -->
       hyphens                   -->
-      display                   -->
+      displayKleisli                   `>=>`
       question                  -->
-      display                   -->
-      prompt                    -->
+      displayKleisli                   `>=>`
+      promptKleisli                    `>=>`
       convertStringToInt        -->
       ensureAmountIsPositive    -->
       round                     -->
       createMessage             -->
-      display                   -->
+      displayKleisli                   `>=>`
       hyphens                   -->
-      display                   -->
-      fplibrary.Description.brokenCreate
+      displayKleisli
   // format: ON
 
   // _ is a placeholder for the function argument. It indicates that the argument is not going to be used within the function implementation.
@@ -77,9 +78,18 @@ object PointFreeProgram {
   private lazy val display: Any => Unit = input =>
     println(input)
 
+  // side effect (writing to the console)
+  private lazy val displayKleisli: Any => Description[Unit] = input => Description.create {
+    println(input)
+  }
+
   // side effect (reading from the console)
   private lazy val prompt: Any => String = _ =>
     "5" //scala.io.StdIn.readLine()
+
+  private lazy val promptKleisli: Any => Description[String] = _ => Description.create {
+    "5" //scala.io.StdIn.readLine()
+  }
 
   // potential side effect (throwing of a NumberFormatException)
   private lazy val convertStringToInt: String => Int = input =>
